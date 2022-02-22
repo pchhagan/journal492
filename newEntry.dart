@@ -53,23 +53,25 @@ class _JournalEntryState extends State<JournalEntry> {
                           }
                         },
                       ),
-                      // DropdownRatingFormField(
-                      //     maxRating: 4,
-                      //     validator: (value) {
-                      //       if (value) {
-                      //         return 'Please enter a number';
-                      //       }
-                      //     },
-                      //     onSaved: (value) {
-                      //       journalEntryFields.rating = value;
-                      //     }),
+                      DropdownRatingFormField(
+                          maxRating: 4,
+                          validator: (value) {
+                            if (value < 1 || value > 4) {
+                              return 'Please choose a rating';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            journalEntryFields.rating = value;
+                          }),
                       SizedBox(height: 10),
                       ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               journalEntryFields.dateTime = DateTime.now();
                               formKey.currentState?.save();
-                              print("help");
+
                               // final databaseManager = DatabaseManager.getInstance();
                               // databaseManager.saveJournalEntry(dto: journalEntryFields );
                               Navigator.of(context).pop();
